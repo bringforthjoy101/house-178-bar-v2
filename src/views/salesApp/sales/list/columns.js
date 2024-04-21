@@ -53,13 +53,13 @@ export const columns = [
 			</Link>
 		),
 	},
-	{
-		name: 'Category ',
-		minWidth: '150px',
-		selector: 'category',
-		sortable: true,
-		cell: row => <span className="text-capitalize">{row.category}</span>
-	},
+	// {
+	// 	name: 'Category ',
+	// 	minWidth: '150px',
+	// 	selector: 'category',
+	// 	sortable: true,
+	// 	cell: row => <span className="text-capitalize">{row.category}</span>
+	// },
 	{
 		name: 'Amount',
 		width: '150px',
@@ -81,34 +81,41 @@ export const columns = [
 		sortable: true,
 		cell: (row) => <span className="text-capitalize">{(row?.amountPaid || 0)?.toLocaleString('en-US', { style: 'currency', currency: 'NGN' })}</span>,
 	},
-	{
-		name: 'Status',
-		width: '100px',
-		selector: 'status',
-		sortable: true,
-		cell: (row) => (
-			<Badge className="text-capitalize" color={statusObj[row.status]} pill>
-				{row.status}
-			</Badge>
-		),
-	},
-	{
-		name: 'Mode',
-		width: '100px',
-		selector: 'mode',
-		sortable: true,
-		cell: (row) => (
-			<Badge className="text-capitalize" color={'light-primary'} pill>
-				{row.mode}
-			</Badge>
-		),
-	},
+	// {
+	// 	name: 'Status',
+	// 	width: '100px',
+	// 	selector: 'status',
+	// 	sortable: true,
+	// 	cell: (row) => (
+	// 		<Badge className="text-capitalize" color={statusObj[row.status]} pill>
+	// 			{row.status}
+	// 		</Badge>
+	// 	),
+	// },
+	// {
+	// 	name: 'Mode',
+	// 	width: '100px',
+	// 	selector: 'mode',
+	// 	sortable: true,
+	// 	cell: (row) => (
+	// 		<Badge className="text-capitalize" color={'light-primary'} pill>
+	// 			{row.mode}
+	// 		</Badge>
+	// 	),
+	// },
 	{
 		name: 'Order Date',
 		minWidth: '150px',
 		selector: 'createdAt',
 		sortable: true,
 		cell: (row) => moment(row.createdAt).format('lll'),
+	},
+	{
+		name: 'Service Charge',
+		width: '150px',
+		selector: 'serviceCharge',
+		sortable: true,
+		cell: (row) => <span className="text-capitalize">{(row?.serviceCharge || 0)?.toLocaleString('en-US', { style: 'currency', currency: 'NGN' })}</span>,
 	},
 	{
 		name: 'Initiated By',

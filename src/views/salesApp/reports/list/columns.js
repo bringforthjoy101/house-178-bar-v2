@@ -95,27 +95,34 @@ export const columns = [
 		sortable: true,
 		cell: (row) => <span className="text-capitalize">{(row?.amountPaid || 0)?.toLocaleString('en-US', { style: 'currency', currency: 'NGN' })}</span>,
 	},
+	// {
+	// 	name: 'Status',
+	// 	width: '100px',
+	// 	selector: 'status',
+	// 	sortable: true,
+	// 	cell: (row) => (
+	// 		<Badge className="text-capitalize" color={statusObj[row.status]} pill>
+	// 			{row.status}
+	// 		</Badge>
+	// 	),
+	// },
+	// {
+	// 	name: 'Mode',
+	// 	width: '100px',
+	// 	selector: 'mode',
+	// 	sortable: true,
+	// 	cell: (row) => (
+	// 		<Badge className="text-capitalize" color={'light-primary'} pill>
+	// 			{row.mode}
+	// 		</Badge>
+	// 	),
+	// },
 	{
-		name: 'Status',
-		width: '100px',
-		selector: 'status',
+		name: 'Service Charge',
+		width: '150px',
+		selector: 'serviceCharge',
 		sortable: true,
-		cell: (row) => (
-			<Badge className="text-capitalize" color={statusObj[row.status]} pill>
-				{row.status}
-			</Badge>
-		),
-	},
-	{
-		name: 'Mode',
-		width: '100px',
-		selector: 'mode',
-		sortable: true,
-		cell: (row) => (
-			<Badge className="text-capitalize" color={'light-primary'} pill>
-				{row.mode}
-			</Badge>
-		),
+		cell: (row) => <span className="text-capitalize">{(row?.serviceCharge || 0)?.toLocaleString('en-US', { style: 'currency', currency: 'NGN' })}</span>,
 	},
 	{
 		name: 'Order Date',

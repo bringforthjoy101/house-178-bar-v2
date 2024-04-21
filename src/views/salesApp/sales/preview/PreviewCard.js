@@ -41,7 +41,7 @@ const PreviewCard = ({ data }) => {
 				{/* Header */}
 				<div className="d-flex justify-content-between flex-md-row flex-column invoice-spacing mt-0">
 					<div>
-						<h4 className="invoice-title">HOUSE 178 BAR</h4>
+						<h4 className="invoice-title">{process.env.REACT_APP_BUSINESS_NAME}</h4>
 						{/*<div className="logo-wrapper">*/}
 						{/*	<Media className="mr-25" left>*/}
 						{/*		<Media*/}
@@ -59,7 +59,7 @@ const PreviewCard = ({ data }) => {
 					</div>
 					<div className="mt-md-0 mt-2">
 						<h4 className="invoice-title">
-							RECEIPT <span className="invoice-number">#{data.saleNumber}</span>
+							BILL PRINT OUT <span className="invoice-number">#{data.saleNumber}</span>
 						</h4>
 						<div className="invoice-date-wrapper">
 							<p className="invoice-date-title">Date Issued:</p>
@@ -160,6 +160,10 @@ const PreviewCard = ({ data }) => {
 							<div className="invoice-total-item">
 								<p className="invoice-total-title">Subtotal:</p>
 								<p className="invoice-total-amount">₦{data.subTotal.toLocaleString()}</p>
+							</div>
+							<div className="invoice-total-item">
+								<p className="invoice-total-title">Service Charge:</p>
+								<p className="invoice-total-amount">₦{data.serviceCharge?.toLocaleString() || 0}</p>
 							</div>
 							<div className="invoice-total-item">
 								<p className="invoice-total-title">Discount:</p>

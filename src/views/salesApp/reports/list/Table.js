@@ -360,7 +360,7 @@ const ReportsTable = () => {
 								/>
 							</FormGroup>
 						</Col>
-						<Col lg="4" md="6">
+						{/* <Col lg="4" md="6">
 							<FormGroup>
 								<Label for="select">Select Category:</Label>
 								<Select
@@ -384,7 +384,7 @@ const ReportsTable = () => {
 									}}
 								/>
 							</FormGroup>
-						</Col>
+						</Col> */}
 						<Col lg="4" md="6">
 							<Label for="range-picker">Select Range</Label>
 							<Flatpickr

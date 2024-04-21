@@ -60,58 +60,22 @@ const Print = () => {
 		<div className="invoice-print" style={{ color: 'black' }}>
 			<div className="row ml-1" style={{ width: '302px' }}>
 				{/* <div className='col-md-3'> */}
-				<div className="d-flex justify-content-between flex-md-row flex-column pb-2">
-					<div>
-						<div className="d-flex mb-1" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-							<h4 className="text-right mb-1" style={{ color: '#000000' }}>
-								HOUSE 178 BAR
-							</h4>
-							{/*<Media className="mr-25" center>*/}
-							{/*	<Media*/}
-							{/*		object*/}
-							{/*		className="rounded mr-50"*/}
-							{/*		src={'https://res.cloudinary.com/bringforthjoy/image/upload/v1661904167/house178_fyddgi.jpg'}*/}
-							{/*		alt="Generic placeholder image"*/}
-							{/*		height="80"*/}
-							{/*	/>*/}
-							{/*</Media>*/}
-						</div>
-						{/* <p className="mb-25">{selectedSale?.business?.name || ''}</p>
-						<p className="mb-25">{selectedSale?.business?.address || ''}</p>
-						<p className="mb-0">+{selectedSale?.business?.phone || ''}</p> */}
-					</div>
+				<div className="d-flex justify-content-between flex-column pb-2">
+					<h2 className="text-center mb-1" style={{ color: '#000000' }}>
+					{process.env.REACT_APP_BUSINESS_NAME}
+					</h2>
 					<div className="mt-md-0 mt-2">
 						<h4 className="text-right mb-1" style={{ color: '#000000' }}>
-							PRINT OUT #{selectedSale?.saleNumber}
+							BILL PRINT OUT #{selectedSale?.saleNumber}
 						</h4>
 						<div className="invoice-date-wrapper mb-50">
 							<span className="invoice-date-title">Date:</span>
 							<span className="font-weight-bold"> {moment(selectedSale?.createdAt).format('ll')}</span>
 						</div>
-						{/* <div className="invoice-date-wrapper">
-							<span className="invoice-date-title">Due Date:</span>
-							<span className="font-weight-bold">{moment(selectedSale?.createdAt).format('LL')}</span>
-						</div> */}
-						<div className="invoice-date-wrapper">
-							<span className="invoice-date-title">Amount Paid:</span>
-							<span className="invoice-date">₦{selectedSale?.amountPaid.toLocaleString()}</span>
-						</div>
-						<div className="invoice-date-wrapper">
-							<span className="invoice-date-title">Balance:</span>
-							<span className="invoice-date">₦{selectedSale?.balance.toLocaleString()}</span>
-						</div>
-						{/* <div className="invoice-date-wrapper">
-							<span className="invoice-date-title">Status:</span>
-							<span className="invoice-date">
-								<Badge className="text-capitalize" color={statusObj[selectedSale?.saleStatus]} pill>
-									{selectedSale?.saleStatus}
-								</Badge>
-							</span>
-						</div> */}
 					</div>
 				</div>
 
-				<hr className="my-2" />
+				{/* <hr className="my-2" /> */}
 
 				<Table className="mt-2 mb-0 mr-2" size="100">
 					<thead>
@@ -131,6 +95,10 @@ const Print = () => {
 							<div className="invoice-total-item">
 								<p className="invoice-total-title">Subtotal:</p>
 								<p className="invoice-total-amount">₦{selectedSale?.subTotal.toLocaleString()}</p>
+							</div>
+							<div className="invoice-total-item">
+								<p className="invoice-total-title">Service Charge:</p>
+								<p className="invoice-total-amount">₦{selectedSale?.serviceCharge.toLocaleString()}</p>
 							</div>
 							<div className="invoice-total-item">
 								<p className="invoice-total-title">Discount:</p>
@@ -153,9 +121,12 @@ const Print = () => {
 				<hr className="my-2" />
 
 				<Row>
-					<Col sm="12">
+					<Col md="12">
 						<span className="font-weight-bold">Note:</span>
-						<span>Thank you for your patronage, We hope to see you again.</span>
+						<span>Please disregard any personal account given and ensure you make payment only to any of the business account.</span>
+						<br />
+						<br />
+						<p>Thanks for your patronage, we hope to see you again.</p>
 					</Col>
 				</Row>
 				{/* </div> */}

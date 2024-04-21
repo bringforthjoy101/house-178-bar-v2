@@ -124,13 +124,15 @@ const Cart = (props) => {
 	const subTotal = products.reduce((n, { total }) => n + total, 0)
 	const [selectedOption, setSelectedOption] = useState('')
 	const [selectedCategory, setSelectedCategory] = useState('')
+	const serviceCharge = Number(process.env.REACT_APP_SERVICE_CHARGE)
 	const [salesData, setSalesData] = useState({
 		subTotal,
 		products,
 		discount: 0,
 		amountPaid: 0,
+		serviceCharge
 	})
-	const totalAmount = Number(subTotal) - Number(salesData.discount)
+	const totalAmount = Number(subTotal) + Number(salesData.serviceCharge) - Number(salesData.discount) 
 	// ** Get data on mount
 	useEffect(() => {
 		// dispatch(getAllData(JSON.parse(localStorage.getItem('userData')).role))
@@ -161,6 +163,7 @@ const Cart = (props) => {
 						products,
 						discount: 0,
 						amountPaid: 0,
+						serviceCharge
 					})
 					// navigate('success');
 					console.log('hare')
@@ -225,7 +228,7 @@ const Cart = (props) => {
 									onChange={setSelectedOption}
 								/>
 							</FormGroup>
-							<FormGroup>
+							{/* <FormGroup>
 								<Label for="category">Category</Label>
 								<Select
 									theme={selectThemeColors}
@@ -237,7 +240,7 @@ const Cart = (props) => {
 									isClearable={false}
 									onChange={setSelectedCategory}
 								/>
-							</FormGroup>
+							</FormGroup> */}
 
 							<hr />
 							<div className="price-details">
@@ -245,6 +248,10 @@ const Cart = (props) => {
 									<li className="price-detail">
 										<div className="detail-title detail-total">Sub Total</div>
 										<div className="detail-amt font-weight-bolder">₦{subTotal.toLocaleString()}</div>
+									</li>
+									<li className="price-detail">
+										<div className="detail-title detail-total">Service Charge</div>
+										<div className="detail-amt font-weight-bolder">₦{serviceCharge.toLocaleString()}</div>
 									</li>
 									<li className="price-detail">
 										<div className="detail-title detail-total">Total</div>
