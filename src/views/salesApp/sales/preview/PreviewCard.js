@@ -1,8 +1,14 @@
 // ** Third Party Components
 import { Badge, Card, CardBody, CardText, Row, Col, Table, Media } from 'reactstrap'
 import moment from 'moment'
+import { isUserLoggedIn } from '@utils'
+import {useState, useEffect} from 'react'
 
 const PreviewCard = ({ data }) => {
+	const [userData, setUserData] = useState(null)
+	useEffect(() => {
+		if (isUserLoggedIn()) setUserData(JSON.parse(localStorage.getItem('userData')))
+	}, [])
 	const renderTable = (products) => {
 		// products = process.env.NODE_ENV === 'production' ? JSON.parse(products) : products
 		// products = JSON.parse(products)
@@ -41,7 +47,7 @@ const PreviewCard = ({ data }) => {
 				{/* Header */}
 				<div className="d-flex justify-content-between flex-md-row flex-column invoice-spacing mt-0">
 					<div>
-						<h4 className="invoice-title">{process.env.REACT_APP_BUSINESS_NAME}</h4>
+						<h4 className="invoice-title">{userData?.businessData.name}</h4>
 						{/*<div className="logo-wrapper">*/}
 						{/*	<Media className="mr-25" left>*/}
 						{/*		<Media*/}

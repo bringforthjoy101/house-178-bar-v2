@@ -1,9 +1,10 @@
 // ** React Imports
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import moment from 'moment'
 import { getSale } from '../store/action'
+import { isUserLoggedIn } from '@utils'
 
 // ** Third Party Components
 import { Row, Col, Table, Media, Badge } from 'reactstrap'
@@ -17,13 +18,16 @@ const Print = () => {
 	const store = useSelector((state) => state.sales),
 		dispatch = useDispatch(),
 		{ id } = useParams()
+	// const [userData, setUserData] = useState(null)
+	const userData = JSON.parse(localStorage.getItem('userData'))
 
 	useEffect(() => {
 		// axios.get(`/api/invoice/invoices/${id}`).then(response => {
 		//   setData(response.data)
 		// })
 		dispatch(getSale(id))
-		// setTimeout(window.print(), 10000)
+		// if (isUserLoggedIn()) setUserData(JSON.parse(localStorage.getItem('userData')))
+		// setTimeout(window.print(), 3000)
 		window.print()
 	}, [])
 
@@ -62,7 +66,7 @@ const Print = () => {
 				{/* <div className='col-md-3'> */}
 				<div className="d-flex justify-content-between flex-column pb-2">
 					<h2 className="text-center mb-1" style={{ color: '#000000' }}>
-					{process.env.REACT_APP_BUSINESS_NAME}
+					{userData?.businessData.name}
 					</h2>
 					<div className="mt-md-0 mt-2">
 						<h4 className="text-right mb-1" style={{ color: '#000000' }}>
@@ -122,8 +126,15 @@ const Print = () => {
 
 				<Row>
 					<Col md="12">
+						{userData?.businessData.accounts.map(account => {
+							return (
+								<h5>{account?.bank} | {account?.number} | {account?.name}</h5>
+							)
+						})}
+					</Col>
+					<Col md="12">
 						<span className="font-weight-bold">Note:</span>
-						<span>Please disregard any personal account given and ensure you make payment only to any of the business account.</span>
+						<span>Please pay with cash, card or any of the above account number(s).</span>
 						<br />
 						<br />
 						<p>Thanks for your patronage, we hope to see you again.</p>

@@ -1,4 +1,4 @@
-import { useState, useContext, Fragment } from 'react'
+import { useState, useContext, Fragment, useEffect } from 'react'
 import Avatar from '@components/avatar'
 import Logo from '../../../assets/images/logo/favicon.png'
 import { useSkin } from '@hooks/useSkin'
@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux'
 import { toast, Slide } from 'react-toastify'
 import { handleLogin } from '@store/actions/auth'
 import { AbilityContext } from '@src/utility/context/Can'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory, useParams } from 'react-router-dom'
 import InputPasswordToggle from '@components/input-password-toggle'
 import { getHomeRouteForLoggedInUser } from '@utils'
 import { Facebook, Twitter, Mail, GitHub, HelpCircle, Coffee } from 'react-feather'
@@ -63,18 +63,24 @@ const Login = (props) => {
 	const ability = useContext(AbilityContext)
 	const dispatch = useDispatch()
 	const history = useHistory()
+	const { code } = useParams()
 	const [phone, setPhone] = useState('')
 	const [password, setPassword] = useState('')
 	const [isSubmitting, setIsSubmitting] = useState(false)
 
 	const illustration = skin === 'dark' ? 'login-v2-dark.svg' : 'login-v2.svg',
-		source = require(`@src/assets/images/pages/${illustration}`).default
+		source = require(`@src/assets/images/pages/login-banner.png`).default
+
+	
+	useEffect(() => {
+		console.log({code})
+	}, [])
 
 	const handleSubmit = async (event, errors) => {
 		if (errors && !errors.length) {
 			setIsSubmitting(true)
 			await useJwt
-				.login({ phone, password })
+				.login({ phone, password, code })
 				.then((res) => {
 					if (res.data.success) {
 						const data = {
@@ -125,7 +131,7 @@ const Login = (props) => {
 				<Col className="d-flex align-items-center auth-bg px-2 p-lg-5" lg="4" sm="12">
 					<Col className="px-xl-2 mx-auto" sm="8" md="6" lg="12">
 						<CardTitle tag="h2" className="font-weight-bold mb-1">
-							Welcome to House 178 Bar 👋
+							Welcome to SalesNInventory 👋
 						</CardTitle>
 						<CardText className="mb-2">Please sign-in to your account and start the adventure</CardText>
 						<AvForm className="auth-login-form mt-2" onSubmit={handleSubmit}>
@@ -172,12 +178,12 @@ const Login = (props) => {
 								<span className="ml-50">Sign In</span>
 							</Button.Ripple>
 						</AvForm>
-						<p className="text-center mt-2">
+						{/* <p className="text-center mt-2">
 							<span className="mr-25">New on our platform?</span>
 							<Link to="/register">
 								<span>Create an account</span>
 							</Link>
-						</p>
+						</p> */}
 					</Col>
 				</Col>
 			</Row>
