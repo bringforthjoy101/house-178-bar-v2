@@ -82,7 +82,8 @@ const Login = (props) => {
 			await useJwt
 				.login({ phone, password, code })
 				.then((res) => {
-					if (res.data.success) {
+					console.log({res})
+					if (res.data.status) {
 						const data = {
 							...res.data.user,
 							accessToken: res.data.token,
