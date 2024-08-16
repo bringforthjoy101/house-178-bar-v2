@@ -386,11 +386,11 @@ mock.onGet('/apps/ecommerce/products').reply(async (config) => {
 	const { q = '', sortBy = 'featured', perPage = 9, page = 1 } = config.params
 	const queryLowered = q.toLowerCase()
 	// console.log(store.getState().ecommerce.products)
-	if (!store.getState().ecommerce.services.length) {
+	if (!store.getState().ecommerce.products.length) {
 		await getProducts()
 	}
-	// const products = store.getState().ecommerce.products.length ? store.getState().ecommerce.products : await getProducts()
-	const products = await getProducts()
+	const products = store.getState().ecommerce.products.length ? store.getState().ecommerce.products : await getProducts()
+	// const products = await getProducts()
 	const filteredData = products?.filter((product) => product.name.toLowerCase().includes(queryLowered))
 
 	let sortDesc = false
@@ -421,8 +421,8 @@ mock.onGet('/apps/ecommerce/products').reply(async (config) => {
 	return [
 		200,
 		{
-			services: paginatedData,
-			filtered: products,
+			products,
+			filtered: paginatedData,
 			total: filteredData.length,
 			userWishlist: data.userWishlist,
 			userCart: data.userCart,
@@ -440,7 +440,7 @@ mock.onGet(/\/apps\/ecommerce\/products\/\d+/).reply(async (config) => {
 	// Convert Id to number
 	productId = Number(productId)
 
-	const products = store.getState().ecommerce.services.length ? store.getState().ecommerce.services : await getProducts()
+	const products = store.getState().ecommerce.products.length ? store.getState().ecommerce.products : await getProducts()
 	const productIndex = products.findIndex((p) => p.id === productId)
 	const product = products[productIndex]
 
@@ -474,8 +474,8 @@ mock.onGet('/apps/ecommerce/wishlist').reply(() => {
 // GET: Return Cart Products
 // ------------------------------------------------
 mock.onGet('/apps/ecommerce/cart').reply(async () => {
-	// const productsData = store.getState().ecommerce.services.length ? store.getState().ecommerce.services : await getProducts()
-	const productsData = await getProducts()
+	const productsData = store.getState().ecommerce.products.length ? store.getState().ecommerce.products : await getProducts()
+	// const productsData = await getProducts()
 	// console.log('productsData', productsData)
 	// console.log('data', data)
 	const products = data.userCart.map((cartProduct) => {
@@ -494,7 +494,7 @@ mock.onGet('/apps/ecommerce/cart').reply(async () => {
 		return product
 	})
 
-	return [200, { services: products }]
+	return [200, { products }]
 })
 
 // ------------------------------------------------

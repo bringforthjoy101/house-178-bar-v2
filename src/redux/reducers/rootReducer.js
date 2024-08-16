@@ -20,7 +20,7 @@ import email from '@src/views/apps/email/store/reducer'
 // import invoice from '@src/views/apps/invoice/store/reducer'
 import invoice from '@src/views/invoiceApp/store/reducer'
 import calendar from '@src/views/apps/calendar/store/reducer'
-import ecommerce from '@src/views/apps/ecommerce/store/reducer'
+import ecommerce from '@src/views/salesApp/ecommerce/store/reducer'
 import dataTables from '@src/views/tables/data-tables/store/reducer'
 
 const rootReducer = combineReducers({

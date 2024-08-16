@@ -54,7 +54,7 @@ const CartDropdown = () => {
 
               return (
                 <Media key={item.id} className='align-items-center'>
-                  <img className='d-block rounded mr-1' src={item.image} alt={item.name} width='62' />
+                  <img className='d-block rounded mr-1' src={'https://res.cloudinary.com/bringforthjoy/image/upload/v1723217917/placeholder.png'} alt={item.name} width='62' />
                   <Media body>
                     <X size={14} className='cart-item-remove' onClick={() => dispatch(deleteCartItem(item.id))} />
                     <div className='media-heading'>

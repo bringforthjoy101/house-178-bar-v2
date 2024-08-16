@@ -54,7 +54,7 @@ const Cart = (props) => {
 				<Card key={item.name} className="ecommerce-card">
 					<div className="item-img">
 						{/* <Link to={`/apps/ecommerce/product/${item.id}`}> */}
-						<img className="img-fluid ml-2" src={item.image} alt={item.name} />
+						<img className="img-fluid ml-2" src={'https://res.cloudinary.com/bringforthjoy/image/upload/v1723217917/placeholder.png'} alt={item.name} />
 						{/* </Link> */}
 					</div>
 					<CardBody>

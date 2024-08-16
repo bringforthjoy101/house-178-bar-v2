@@ -41,7 +41,7 @@ const ProductsPage = props => {
   // ** Render pages
   const renderPageItems = () => {
     const arrLength =
-      store.totalServices !== 0 && store.services.length !== 0 ? Number(store.totalServices) / store.services.length : 3
+      store.totalProducts !== 0 && store.filtered.length !== 0 ? Number(store.totalProducts) / store.products.length : 3
 
     return new Array(Math.trunc(arrLength)).fill().map((item, index) => {
       return (
@@ -60,7 +60,7 @@ const ProductsPage = props => {
 
   // ** handle next page click
   const handleNext = () => {
-    if (store.params.page !== Number(store.totalServices) / store.services.length) {
+    if (store.params.page !== Number(store.totalProducts) / store.products.length) {
       handlePageChange('next')
     }
   }
@@ -84,14 +84,14 @@ const ProductsPage = props => {
             onClick={() => setSidebarOpen(false)}
           ></div>
           <ProductsSearchbar dispatch={dispatch} getProducts={getProducts} store={store} />
-          {store.services?.length ? (
+          {store.filtered?.length ? (
             <Fragment>
               <ProductCards
                 store={store}
                 dispatch={dispatch}
                 addToCart={addToCart}
                 activeView={activeView}
-                products={store.services}
+                products={store.filtered}
                 getProducts={getProducts}
                 getCartItems={getCartItems}
                 addToWishlist={addToWishlist}
@@ -110,7 +110,7 @@ const ProductsPage = props => {
                 <PaginationItem
                   className='next-item'
                   onClick={() => handleNext()}
-                  disabled={store.params.page === Number(store.totalServices) / store.services.length}
+                  disabled={store.params.page === Number(store.totalProducts) / store.products.length}
                 >
                   <PaginationLink href='/' onClick={e => e.preventDefault()}></PaginationLink>
                 </PaginationItem>
